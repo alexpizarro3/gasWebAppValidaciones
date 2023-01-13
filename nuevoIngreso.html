@@ -317,7 +317,7 @@
                 <option value="no">NO</option>
               </select>
             </div>
-            <div class="col">
+            <div class="col" style="background: #00bbf9;">
               <label for="accion12" class="form-label">Corregir y completar información*</label>
             </div>
             <div class="col">
@@ -328,9 +328,27 @@
               </select>
             </div>
           </div>
+          <div class="row" style="background: #00bbf9">
+            <div class="col">
+              <div class="camera">
+                <video id="video" width="640" height="480" hidden autoplay></video>
+              </div>
+            </div>
+            <div class="col">
+              <canvas id="canvas"> </canvas>
+              <div class="output">
+                <img id="photo" alt="La captura aparecerá aquí"/>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="background: #00bbf9">
+            <div class="col" style="text-align: center">
+              <button id="mostrarcamara" class="btn btn-primary" type="button" onclick="mostrarOcultarVideo()">Mostrar</button>
+              <button id="startbutton" class="btn btn-primary" type="button">Capturar</button>
+            </div>
+          </div>
           <div class="row" style="background:#00bbf9">
             <div class="col" style="text-align:center">
-              <input type="file" accept="image/*;capture=camera"> 
               <label for="observaciones" class="form-label">Observaciones</label>
               <input type="text" id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones">
               <br/>

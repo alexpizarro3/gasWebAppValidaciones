@@ -42,3 +42,36 @@
   }
 
 </script>
+
+<script>
+  function mostrarOcultarVideo(){
+    var tagVideo = document.querySelector('video');
+    var btnMostrar = document.getElementById('mostrarcamara');
+    if (tagVideo.hidden == false){
+      tagVideo.hidden = true;
+      btnMostrar.innerText = "Mostrar";
+      var valCerrar = {video: false, audio: false};
+      mostrarVideo(valCerrar);
+    } else{
+      tagVideo.hidden = false;
+      btnMostrar.innerText = "Ocultar";
+      var valAbrir = {video: true, audio: false};
+      mostrarVideo(valAbrir);
+    }
+  }
+
+  function mostrarVideo(constraints){
+    var video = document.getElementById('video');
+    navigator.mediaDevices.getUserMedia(constraints)
+  
+      .then(function(stream) {
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch(function(err) {
+        console.log("An error has occured: " + err);
+      });
+
+  }
+
+</script>
