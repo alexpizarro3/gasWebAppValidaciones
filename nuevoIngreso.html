@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <?!= include('styleCss'); ?> <!--Aqui agregamos el archivo styleCss.html -->
+  </head>
+  <body>
+    <!--Encabezado -->
+    <div class="container" style="background:#a2d2ff">
+      <h1 style="background:#1d3557; color:white; text-align: center">Nueva Validación de Planta</h1>
+      <form id="formRegistro" name="formRegistro" class="needs-validation" method="POST" action="<?= appUrl ?>" novalidate>
+        <div class="mb-3">
+          <br/>
+          <div class="row" style="background:#e63946; padding: 1em" >
+            <div class="col">
+              <label for="tipoValidacion" class="form-label">Tipo de Validación*</label>
+              <select id="tipoValidacion" name="tipoValidacion" class="form-select" aria-label="Default select example">
+              <option value="calidad">Calidad</option>
+              <option value="produccion">Producción</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="fecha" class="form-label">Fecha*</label>
+              <input type="datetime-local" id="fecha" name="fecha" class="form-control" placeholder="Fecha y Hora" required>
+            </div>
+            <div class="col">
+              <label for="turno" class="form-label">Turno*</label>
+              <select id="turno" name="turno" class="form-select" aria-label="Default select example">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="maquina" class="form-label">Maquina*</label>
+              <input type="text" id="maquina" name="maquina" class="form-control" placeholder="Maquina" required>
+            </div>
+            <div class="col">
+              <label for="orden" class="form-label">Orden*</label>
+              <input type="number" id="orden" name="orden" class="form-control" placeholder="Orden" required>
+            </div>
+            <div class="col">
+              <label for="evaluador" class="form-label">Evaluador*</label>
+              <input type="text" id="evaluador" name="evaluador" class="form-control" placeholder="Evaluador" required>
+            </div>
+          </div>
+          <!--Zona de Preguntas y Acciones -->
+          <br/>
+          <div class="row" style="background:#1d3557; color:white; text-align: center">
+            <div class="col">
+              <h3>Preguntas de validación</h3>
+            </div>
+            <div class="col">
+              <h3>Acciones si respuesta es No</h3>
+            </div>
+          </div>
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question1" class="form-label">GEN Formato completo y con datos ?*</label>
+            </div>
+            <div class="col">
+              <select id="question1" name="question1" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion1" class="form-label">Completar y corregir información*</label>
+            </div>
+            <div class="col">
+              <select id="accion1" name="accion1" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question2" class="form-label">DM Correcta info de encabezado OP, Material y barras ?*</label>
+            </div>
+            <div class="col"> 
+              <select id="question2" name="question2" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion2" class="form-label">Corregir información*</label>
+            </div>
+            <div class="col">
+              <select id="accion2" name="accion2" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question3" class="form-label">DM El registro evidencia la correcta expulsion de las barras ?*</label>
+            </div>
+            <div class="col">
+              <select id="question3" name="question3" onchange="desactiva(this)" class="form-select" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion3" class="form-label">Retenga el producto desde la última toma correcta*</label>
+            </div>
+            <div class="col">
+              <select id="accion3" name="accion3" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question4" class="form-label">DM La cantidad de hallazgos está dentro del límite ?*</label>
+            </div>
+            <div class="col">
+              <select id="question4" name="question4" onchange="desactiva(this)" class="form-select" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion4" class="form-label">Dar seguimiento y evidenciarlo*</label>
+            </div>
+            <div class="col">
+              <select id="accion4" name="accion4" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question5" class="form-label">DM Se utiliza según el plan HACCP en detector correspondiente?</label>
+            </div>
+            <div class="col">
+              <select id="question5" name="question5" onchange="desactiva(this)" class="form-select" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion5" class="form-label">Retener el producto*</label>
+            </div>
+            <div class="col">
+              <select id="accion5" name="accion5" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question6" class="form-label">DM La recetadel DEM coincide con el producto trabajado ?</label>
+            </div>
+            <div class="col">
+              <select id="question6" name="question6" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion6" class="form-label">Retener el producto*</label>
+            </div>
+            <div class="col">
+              <select id="accion6" name="accion6" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question7" class="form-label">DM Se cumple con la frecuencia de seguimiento ?</label>
+            </div>
+            <div class="col">
+              <select id="question7" name="question7" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion7" class="form-label">Verificar estado del equipo y evidenciarlo*</label>
+            </div>
+            <div class="col">
+              <select id="accion7" name="accion7" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question8" class="form-label">CH Se cumple con la frecuencia de inspección ?</label>
+            </div>
+            <div class="col">
+              <select id="question8" name="question8" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion8" class="form-label">Pida al operario el motivo y observaciones*</label>
+            </div>
+            <div class="col">
+              <select id="accion8" name="accion8" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question9" class="form-label">CH Correcta la información de codificación ?</label>
+            </div>
+            <div class="col">
+              <select id="question9" name="question9" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion9" class="form-label">Retenga el producto desde la última toma correcta*</label>
+            </div>
+            <div class="col">
+              <select id="accion9" name="accion9" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question10" class="form-label">CH Se cumple la frecuencia de seguimiento de hermeticidad?</label>
+            </div>
+            <div class="col">
+              <select id="question10" name="question10" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion10" class="form-label">Retenga el producto desde la última toma correcta*</label>
+            </div>
+            <div class="col">
+              <select id="accion10" name="accion10" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question11" class="form-label">RO Los paros tienen código TPM y firma las averias?</label>
+            </div>
+            <div class="col">
+              <select id="question11" name="question11" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion11" class="form-label">Completar la info y pefir firma al coordinador*</label>
+            </div>
+            <div class="col">
+              <select id="accion11" name="accion11" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row" style="background:#00bbf9; padding: 1em">
+            <div class="col">
+              <label for="question12" class="form-label">RO Correcta la info de materiales consumidos ?</label>
+            </div>
+            <div class="col">
+              <select id="question12" name="question12" class="form-select" onchange="desactiva(this)" aria-label="Default select example">
+                <option value="n/a">N/A</option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="accion12" class="form-label">Corregir y completar información*</label>
+            </div>
+            <div class="col">
+              <select id="accion12" name="accion12" class="form-select" hidden aria-label="Default select example">
+                <option value=" "> </option>
+                <option value="si">SÍ</option>
+                <option value="no">NO</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" style="background:#00bbf9">
+            <div class="col" style="text-align:center">
+              <input type="file" accept="image/*;capture=camera"> 
+              <label for="observaciones" class="form-label">Observaciones</label>
+              <input type="text" id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones">
+              <br/>
+              <button class="btn btn-primary" type="submit">Guardar</button>
+              <br/>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+      
+    </div>
+
+    <?!= include('functionsJs'); ?>
+  </body>
+</html>
