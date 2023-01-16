@@ -45,35 +45,38 @@
 </script>
 
 <script> //Script para habilitar o deshabilitar la camara con click de un boton
-  const width = 620;    // We will scale the photo width to this
-  const height = 480;     // This will be computed based on the input stream
+  var photo = document.getElementById('photo'); //Se toma el tag photo del html
+  var video = document.getElementById('video'); //Se toma el tag de video del html
+  var canvas = document.getElementById('canvas'); //se toma el tag canvas del html
+  var context = canvas.getContext('2d'); //Se crea el contexto del canvas a mostrar
+  var btnGuardarFoto = document.getElementById('btnGuardarFoto');
 
   function mostrarOcultarVideo() {   //Se habilita o deshabilita con el click del boton se ejecuta otra funcion mostrarVideo()
-    var tagVideo = document.querySelector('video'); //Se asigna el tagVideo
-    var btnMostrar = document.getElementById('mostrarcamara'); //Se asigna el btnMostrar camara
-    if (tagVideo.hidden == false) { //Condicion para ver si la propiedad hidden es true o false
-      tagVideo.hidden = true; //Se cambia la condicion hidden para el tag de video para ocultarlo o mostrarlo
-      btnMostrar.innerText = "Camara"; //Se asigna el texto al boton
+    var btnCapturar = document.getElementById('capturar'); //Se asigna el btnMostrar camara
+    if (video.hidden == false) { //Condicion para ver si la propiedad hidden es true o false
+      video.hidden = true; //Se cambia la condicion hidden para el tag de video para ocultarlo o mostrarlo
+      btnCapturar.innerText = "Usar Cámara"; //Se asigna el texto al boton
+      btnGuardarFoto.hidden = false; //Se cambia la condicion hidden
       var valCerrar = { video: false, audio: false }; // se asignan valores a la funcion mostrarVideo
       mostrarVideo(valCerrar); //Se llama la funcion mostrarVideo
     } else {
-      tagVideo.hidden = false; //Se cambia la condicion hidden para el tag de video para ocultarlo o mostrarlo
-      btnMostrar.innerText = "Cerrar Cámara"; //Se cambia el texto al boton
+      video.hidden = false; //Se cambia la condicion hidden para el tag de video para ocultarlo o mostrarlo
+      btnCapturar.innerText = "Capturar"; //Se cambia el texto al boton
+      btnGuardarFoto.hidden = true; //Se cambia la condicion
       var valAbrir = { video: true, audio: false }; // se asgnan valores a la función mostrarVideo
       mostrarVideo(valAbrir); //Se llama la funcion mostrarVideo
     }
   }
 
-  function mostrarVideo(constraints) {
-    var video = document.getElementById('video');
-    if (constraints.video == true) {
+  function mostrarVideo(constraints) {  //Se crea funcion mostrarVideo
+    if (constraints.video == true) { //Se valida si video esta en true or false
       console.log(constraints.video);
-      navigator.mediaDevices.getUserMedia(constraints)
-        .then(function (stream) {
+      navigator.mediaDevices.getUserMedia(constraints) // se establecen los parámetros para los permisos de uso de video y audio
+        .then(function (stream) { //Se habilita el stream y el play del video
           video.srcObject = stream;
           video.play();
         })
-        .catch(function (err) {
+        .catch(function (err) { //Se muestra el error obtenido ejemplo si se denegan los permisos de uso de video
           console.log("An error has occured: " + err);
         });
     } else {
@@ -88,15 +91,20 @@
     }
   }
 
-  function tomarFoto(){
-    var photo = document.getElementById('photo');
-    var video = document.getElementById('video');
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    context.drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/png');
-    canvas.hidden = true;
-    photo.setAttribute('src',data);
+  function tomarFoto(){ //Funcion que captura la foto del video
+    canvas.width = video.clientWidth; //se establecen el tamaño igual al tag de video
+    canvas.height = video.clientHeight;
+    context.drawImage(video, 0, 0); //Se captura la imagen en el lienzo del canvas
+    canvas.hidden = false;
+    mostrarOcultarVideo();
+    var data = canvas.toDataURL('image/png'); //se almacena la url de la imagen y formato
+    photo.setAttribute('src',data); //Se asigna la direccion de la imagen al tag photo
+  }
+
+  function guardarFoto(){
+    canvas.hidden = true; //Se oculta el canvas tag
+    photo.hidden = true; //Se oculta la foto tag
+    btnGuardarFoto.hidden = true; //Se cambia la condicion
   }
 
 </script>

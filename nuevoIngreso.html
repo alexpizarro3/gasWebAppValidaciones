@@ -337,16 +337,16 @@
           </div>
           <div class="row" style="background: #00bbf9; text-align: center;">
             <div class="col">
-              <canvas id="canvas"> </canvas>
+              <canvas id="canvas" hidden></canvas>
               <div class="output">
-                <img id="photo" width="640" height="480" alt="La captura aparecerá aquí"/>
+                <img id="photo" width="640" height="480" hidden/>
               </div>
             </div>
           </div>
           <div class="row" style="background: #00bbf9">
             <div class="col" style="text-align: center">
-              <button id="mostrarcamara" class="btn btn-primary" type="button" onclick="mostrarOcultarVideo()">Mostrar</button>
-              <button id="capturar" class="btn btn-primary" type="button" onclick="tomarFoto()">Capturar</button>
+              <button id="capturar" class="btn btn-primary" type="button" onclick="tomarFoto()">Usar Cámara</button>
+              <button id="btnGuardarFoto" class="btn btn-primary" type="button" onclick="guardarFoto()" hidden >Guardar Foto</button>
             </div>
           </div>
           <div class="row" style="background:#00bbf9">
