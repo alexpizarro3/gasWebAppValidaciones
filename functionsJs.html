@@ -95,7 +95,7 @@
     canvas.width = video.clientWidth; //se establecen el tamaño igual al tag de video
     canvas.height = video.clientHeight;
     context.drawImage(video, 0, 0); //Se captura la imagen en el lienzo del canvas
-    canvas.hidden = false;
+    canvas.hidden = false; //Se muestra el tag Canvas
     mostrarOcultarVideo();
     var data = canvas.toDataURL('image/png'); //se almacena la url de la imagen y formato
     photo.setAttribute('src',data); //Se asigna la direccion de la imagen al tag photo

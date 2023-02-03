@@ -29,6 +29,7 @@ function idConsecutivo(){ //Genera el consecutivo para la columna Id
 }
 
 function doPost(e){ //Función que obtiene los valores de la pagina y los pone en el Sheet 
+  console.log(e);
   var SS = SpreadsheetApp.getActiveSpreadsheet(); //Obtiene el libro actual de sheet
   var sheetRegistro = SS.getSheetByName('Verificaciones'); //Obtiene la hoja del libro
   var id = idConsecutivo(); //Se llama a la funcion idConsecutivo y se obtiene el nuevo id

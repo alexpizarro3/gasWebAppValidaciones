@@ -6,54 +6,58 @@
   </head>
   <body>
     <!--Encabezado -->
-    <div class="container" style="background:#a2d2ff">
-      <h1 style="background:#1d3557; color:white; text-align: center">Nueva Validación de Planta</h1>
+    <div class="container" style="background: aquamarine">
+      
       <form id="formRegistro" name="formRegistro" class="needs-validation" method="POST" action="<?= appUrl ?>" novalidate>
         <div class="mb-3">
-          <br/>
-          <div class="row" style="background:#e63946; padding: 1em" >
-            <div class="col">
-              <label for="tipoValidacion" class="form-label">Tipo de Validación*</label>
-              <select id="tipoValidacion" name="tipoValidacion" class="form-select" aria-label="Default select example">
-              <option value="calidad">Calidad</option>
-              <option value="produccion">Producción</option>
-              </select>
+          <nav class="navbar sticky-top">
+            <div class="row" style="background:#e63946; padding: 1em" >
+              <h1 style="background:#1d3557; color:white; text-align: center">Nueva Validación de Planta</h1>
+              <br>
+              <div class="col">
+                <label for="tipoValidacion" class="form-label">Tipo de Validación*</label>
+                <select id="tipoValidacion" name="tipoValidacion" class="form-select" aria-label="Default select example">
+                <option value="calidad">Calidad</option>
+                <option value="produccion">Producción</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="fecha" class="form-label">Fecha*</label>
+                <input type="datetime-local" id="fecha" name="fecha" class="form-control" placeholder="Fecha y Hora" required>
+              </div>
+              <div class="col">
+                <label for="turno" class="form-label">Turno*</label>
+                <select id="turno" name="turno" class="form-select" aria-label="Default select example">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="maquina" class="form-label">Maquina*</label>
+                <input type="text" id="maquina" name="maquina" class="form-control" placeholder="Maquina" required>
+              </div>
+              <div class="col">
+                <label for="orden" class="form-label">Orden*</label>
+                <input type="number" id="orden" name="orden" class="form-control" placeholder="Orden" required>
+              </div>
+              <div class="col">
+                <label for="evaluador" class="form-label">Evaluador*</label>
+                <input type="text" id="evaluador" name="evaluador" class="form-control" placeholder="Evaluador" required>
+              </div>
             </div>
-            <div class="col">
-              <label for="fecha" class="form-label">Fecha*</label>
-              <input type="datetime-local" id="fecha" name="fecha" class="form-control" placeholder="Fecha y Hora" required>
+
+            <!--Zona de Preguntas y Acciones -->
+            <div class="row container-fluid" style="background:#1d3557; color:white; text-align: center;">
+              <div class="col" style="text-align: center">
+                <h3>Preguntas de validación</h3>
+              </div>
+              <div class="col" style="text-align: center">
+                <h3>Acciones si respuesta es No</h3>
+              </div>
             </div>
-            <div class="col">
-              <label for="turno" class="form-label">Turno*</label>
-              <select id="turno" name="turno" class="form-select" aria-label="Default select example">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="col">
-              <label for="maquina" class="form-label">Maquina*</label>
-              <input type="text" id="maquina" name="maquina" class="form-control" placeholder="Maquina" required>
-            </div>
-            <div class="col">
-              <label for="orden" class="form-label">Orden*</label>
-              <input type="number" id="orden" name="orden" class="form-control" placeholder="Orden" required>
-            </div>
-            <div class="col">
-              <label for="evaluador" class="form-label">Evaluador*</label>
-              <input type="text" id="evaluador" name="evaluador" class="form-control" placeholder="Evaluador" required>
-            </div>
-          </div>
-          <!--Zona de Preguntas y Acciones -->
-          <br/>
-          <div class="row" style="background:#1d3557; color:white; text-align: center">
-            <div class="col">
-              <h3>Preguntas de validación</h3>
-            </div>
-            <div class="col">
-              <h3>Acciones si respuesta es No</h3>
-            </div>
-          </div>
+          </nav>
+
           <div class="row" style="background:#00bbf9; padding: 1em">
             <div class="col">
               <label for="question1" class="form-label">GEN Formato completo y con datos ?*</label>
@@ -326,27 +330,6 @@
                 <option value="si">SÍ</option>
                 <option value="no">NO</option>
               </select>
-            </div>
-          </div>
-          <div class="row" style="background: #00bbf9; text-align: center;">
-            <div class="col">
-              <div class="camera">
-                <video id="video" width="640" height="480" hidden autoplay></video>
-              </div>
-            </div> 
-          </div>
-          <div class="row" style="background: #00bbf9; text-align: center;">
-            <div class="col">
-              <canvas id="canvas" hidden></canvas>
-              <div class="output">
-                <img id="photo" width="640" height="480" hidden/>
-              </div>
-            </div>
-          </div>
-          <div class="row" style="background: #00bbf9">
-            <div class="col" style="text-align: center">
-              <button id="capturar" class="btn btn-primary" type="button" onclick="tomarFoto()">Usar Cámara</button>
-              <button id="btnGuardarFoto" class="btn btn-primary" type="button" onclick="guardarFoto()" hidden >Guardar Foto</button>
             </div>
           </div>
           <div class="row" style="background:#00bbf9">
